@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv8 Object Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .image-container img {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 48%;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YOLOv8 Object Detection</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Upload and Detect</button>
+        </form>
+
+        {% if uploaded_file_url %}
+            <div class="image-container">
+                <div>
+                    <h2>Uploaded Image:</h2>
+                    <img src="{{ uploaded_file_url }}" alt="Uploaded Image">
+                </div>
+                <div>
+                    <h2>Detected Image:</h2>
+                    <img src="{{ output_image_url }}" alt="Detected Image">
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
